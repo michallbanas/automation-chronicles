@@ -1,23 +1,48 @@
-"use client"
 
-import { useTheme } from "next-themes"
+
+
+
+"use client";
+
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function ModeToggle() {
-  const { setTheme, theme } = useTheme()
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const localStorageValue = localStorage.getItem("theme");
+    if (!localStorageValue) {
+      const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches;
+      setTheme(prefersLightMode ? "light" : "dark");
+    }
+    setMounted(true);
+   
+  }, [theme, setTheme]);
+
+  if (!mounted) return null;
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
 
   return (
     <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="border rounded-md w-6 h-6 flex items-center justify-center">
+      onClick={toggleTheme}
+      className="border rounded-md w-6 h-6 flex items-center justify-center"
+    >
       <span className="sr-only">Toggle mode</span>
-      {theme !== "dark" ? (
+      {theme === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-4 h-4">
+          className="w-4 h-4"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -31,7 +56,8 @@ export function ModeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-4 h-4">
+          className="w-4 h-4"
+        >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -40,5 +66,6 @@ export function ModeToggle() {
         </svg>
       )}
     </button>
-  )
+  );
 }
+
