@@ -1,27 +1,34 @@
-
-
-
-
 "use client";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import LoadingSkeleton from './loading';
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [, setLoading] = useState(true);
 
-  useEffect(() => {
+  const initializeTheme = () => {
     const localStorageValue = localStorage.getItem("theme");
     if (!localStorageValue) {
       const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches;
       setTheme(prefersLightMode ? "light" : "dark");
     }
-    setMounted(true);
-   
-  }, [theme, setTheme]);
+  };
 
-  if (!mounted) return null;
+  useEffect(() => {
+    try {
+      initializeTheme();
+    } catch (error) {
+      console.error("Failed to initialize theme", error);
+    } finally {
+      setLoading(false);
+      setMounted(true);
+    }
+  }, [theme]);
+
+  if (!mounted || !resolvedTheme) return <LoadingSkeleton />
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -31,6 +38,8 @@ export function ModeToggle() {
   return (
     <button
       onClick={toggleTheme}
+      id="theme-toggle"
+      name="theme-toggle"
       className="border rounded-md w-6 h-6 flex items-center justify-center"
     >
       <span className="sr-only">Toggle mode</span>

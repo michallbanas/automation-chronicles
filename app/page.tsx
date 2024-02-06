@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <div className="prose dark:prose-invert">
+    <section id="articles" className="prose dark:prose-invert">
       {allPosts.map((post) => (
         <article key={post._id}>
           <Link href={post.slug}>
@@ -12,6 +12,6 @@ export default function Home() {
           {post.description && <p>{post.description}</p>}
         </article>
       ))}
-    </div>
+    </section>
   )
 }
