@@ -1,0 +1,8 @@
+.cache
+.tmp/
+__generated__/
+data/
+dist/
+package.json
+*.md
+*.mdx

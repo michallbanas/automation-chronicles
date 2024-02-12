@@ -21,9 +21,7 @@ async function getPageFromParams(params: PageProps["params"]) {
   return page
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const page = await getPageFromParams(params)
 
   if (!page) {
