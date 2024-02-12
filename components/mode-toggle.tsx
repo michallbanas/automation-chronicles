@@ -1,47 +1,46 @@
-"use client";
+"use client"
 
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import LoadingSkeleton from './loading';
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
+import LoadingSkeleton from "./loading"
 
 export function ModeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [, setLoading] = useState(true);
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [, setLoading] = useState(true)
 
   const initializeTheme = () => {
-    const localStorageValue = localStorage.getItem("theme");
+    const localStorageValue = localStorage.getItem("theme")
     if (!localStorageValue) {
-      const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches;
-      setTheme(prefersLightMode ? "light" : "dark");
+      const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+      setTheme(prefersLightMode ? "light" : "dark")
     }
-  };
+  }
 
   useEffect(() => {
     try {
-      initializeTheme();
+      initializeTheme()
     } catch (error) {
-      console.error("Failed to initialize theme", error);
+      console.error("Failed to initialize theme", error)
     } finally {
-      setLoading(false);
-      setMounted(true);
+      setLoading(false)
+      setMounted(true)
     }
-  }, [theme]);
+  }, [theme])
 
   if (!mounted || !resolvedTheme) return <LoadingSkeleton />
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
+  }
 
   return (
     <button
       onClick={toggleTheme}
       id="theme-toggle"
       name="theme-toggle"
-      className="border rounded-md w-6 h-6 flex items-center justify-center"
-    >
+      className="border rounded-md w-6 h-6 flex items-center justify-center">
       <span className="sr-only">Toggle mode</span>
       {theme === "light" ? (
         <svg
@@ -50,8 +49,7 @@ export function ModeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-4 h-4"
-        >
+          className="w-4 h-4">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -65,8 +63,7 @@ export function ModeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-4 h-4"
-        >
+          className="w-4 h-4">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -75,6 +72,5 @@ export function ModeToggle() {
         </svg>
       )}
     </button>
-  );
+  )
 }
-
