@@ -19,7 +19,7 @@ Problém však môže nastať, ak chceme `beforeEach()` nastaviť globálne pre 
 
 Na začiatok treba poznamenať, že už existuje inicatíva pre túto funkcionalitu, a viac si o nej môžete prečítať na GitHube Playwrightu [tu](https://github.com/microsoft/playwright/issues/9468) a [tu](https://github.com/microsoft/playwright/issues/19766) 📖
 
-Existuje však spôsob ako to dosiahnuť aj teraz a to pomocou [Automatic fixtures](https://playwright.dev/docs/test-fixtures#automatic-fixtures). Predstavme si teda situáciu, že chceme pred každým testom akceptované cookies, ale nechceme v každom teste klikať na akceptovať cookies, aby sme sa zbavili otravného banneru. Samozrejme, môžeme to urobiť podobným spôsobom ako v príklade vyššie, ale v prípade, že budeme mať 182 testov, tak to musíme urobiť v 182 testoch, čo sa nám samozrejme nechce, lebo môžeme byť miesto toho radšej v kuchynke na káve ☕️ Poďme si teda ukázať, ako na to.
+Je však aj spôsob ako to dosiahnuť teraz a to pomocou [Automatic fixtures](https://playwright.dev/docs/test-fixtures#automatic-fixtures). Predstavme si teda situáciu, že chceme mať pred každým testom akceptované cookies, ale nechceme v každom teste klikať na button, aby sme sa zbavili otravného banneru. Samozrejme, môžeme to urobiť podobným spôsobom ako v príklade vyššie, ale v prípade, že budeme mať 182 testov, tak to musíme urobiť v 182 testoch, čo je dosť neefektívne.
 
 Fixtures môžeme chápať ako možnosť rozšíriť test konfiguráciu a pridať do nej nejaké vlastnosti, ktoré potrebujeme. V našom prípade chceme pridať cookies, ktoré budú akceptované pred každým testom. Najprv si vytvoríme súbor `fixtures.ts` a do neho pridáme nasledovný kód:
 
@@ -27,8 +27,7 @@ Fixtures môžeme chápať ako možnosť rozšíriť test konfiguráciu a prida�
 import { test as base } from "@playwright/test"
 ```
 
-Tento import znamená, že importujeme `test` z `@playwright/test` a priradíme ho do premennej `base`. Teraz môžeme vytvoriť nový `test` a rozšíriť ho. 
-
+Tento import znamená, že importujeme `test` z `@playwright/test` a priradíme ho do premennej `base`. Teraz môžeme vytvoriť novú `test` inštanciu, ktorú rozšírime. Hack spočíva v tom, že do nej nič nedoplníme, objekt necháme prázdny. Je to z toho dôvodu, že tam nepridávame napr. login alebo obdobnú funkcionalitu. My potrebujeme pracovať s hooks a tie sú časťou test-runneru. Preto beforeEach naviažeme na `test` inštanciu, ktorú sme si vytvorili a tam už môžeme napísať kód na pridanie cookies:
 
 ```js
 import { test as base } from "@playwright/test"
@@ -44,4 +43,15 @@ test.beforeEach(async ({ context }) => {
     },
   ])
 })
+```
+
+V tomto bode nám už stačí iba jedna zmena, ktorú urobíme v našich testoch. 
+
+Namiesto tohto importu:
+```js
+import { test } from "@playwright/test"
+```
+Použijeme tento import:
+```js
+import { test } from "./fixtures"
 ```
