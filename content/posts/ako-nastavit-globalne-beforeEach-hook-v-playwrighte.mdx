@@ -1,0 +1,47 @@
+---
+title: Ako nastaviť globálne beforeEach hook v Playwrighte
+description: Placeholder pre opis prvého článku
+date: "2024-02-14"
+---
+
+## Čo je beforeEach() hook?
+
+`beforeEach()` hook je funkcia, ktorá spustí daný kód pred každým testom v rámci test súboru. V Playwrighte sa dá použiť nasledovne (napríklad na otvorenie stránky pred každým testom):
+
+```js
+test.beforeEach(async ({ page }) => {
+  await page.goto("https://www.kiwi.com/en/")
+})
+```
+
+## Ako nastaviť globálny beforeEach() hook?
+Problém však môže nastať, ak chceme `beforeEach()` nastaviť globálne pre všetky testy. Tí, čo majú skúsenosti so Cypressom, vedia, že tam sa to dá jednoducho nastaviť v support súbore (`cypress/support/e2e.js`) a je vybavené. Ale ako postupovať v prípade Playwrightu?
+
+Na začiatok treba poznamenať, že už existuje inicatíva pre túto funkcionalitu, a viac si o nej môžete prečítať na GitHube Playwrightu [tu](https://github.com/microsoft/playwright/issues/9468) a [tu](https://github.com/microsoft/playwright/issues/19766) 📖
+
+Existuje však spôsob ako to dosiahnuť aj teraz a to pomocou [Automatic fixtures](https://playwright.dev/docs/test-fixtures#automatic-fixtures). Predstavme si teda situáciu, že chceme pred každým testom akceptované cookies, ale nechceme v každom teste klikať na akceptovať cookies, aby sme sa zbavili otravného banneru. Samozrejme, môžeme to urobiť podobným spôsobom ako v príklade vyššie, ale v prípade, že budeme mať 182 testov, tak to musíme urobiť v 182 testoch, čo sa nám samozrejme nechce, lebo môžeme byť miesto toho radšej v kuchynke na káve ☕️ Poďme si teda ukázať, ako na to.
+
+Fixtures môžeme chápať ako možnosť rozšíriť test konfiguráciu a pridať do nej nejaké vlastnosti, ktoré potrebujeme. V našom prípade chceme pridať cookies, ktoré budú akceptované pred každým testom. Najprv si vytvoríme súbor `fixtures.ts` a do neho pridáme nasledovný kód:
+
+```js
+import { test as base } from "@playwright/test"
+```
+
+Tento import znamená, že importujeme `test` z `@playwright/test` a priradíme ho do premennej `base`. Teraz môžeme vytvoriť nový `test` a rozšíriť ho. 
+
+
+```js
+import { test as base } from "@playwright/test"
+
+export const test = base.extend({})
+test.beforeEach(async ({ context }) => {
+  await context.addCookies([
+    {
+      name: "__kwc_agreed",
+      value: "true",
+      domain: ".kiwi.com",
+      path: "/",
+    },
+  ])
+})
+```
