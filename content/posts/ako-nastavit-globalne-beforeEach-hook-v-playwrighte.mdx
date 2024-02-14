@@ -1,0 +1,57 @@
+---
+title: Ako nastaviť globálne beforeEach hook v Playwrighte
+description: Placeholder pre opis prvého článku
+date: "2024-02-14"
+---
+
+## Čo je beforeEach() hook?
+
+`beforeEach()` hook je funkcia, ktorá spustí daný kód pred každým testom v rámci test súboru. V Playwrighte sa dá použiť nasledovne (napríklad na otvorenie stránky pred každým testom):
+
+```js
+test.beforeEach(async ({ page }) => {
+  await page.goto("https://www.kiwi.com/en/")
+})
+```
+
+## Ako nastaviť globálny beforeEach() hook?
+Problém však môže nastať, ak chceme `beforeEach()` nastaviť globálne pre všetky testy. Tí, čo majú skúsenosti so Cypressom, vedia, že tam sa to dá jednoducho nastaviť v support súbore (`cypress/support/e2e.js`) a je vybavené. Ale ako postupovať v prípade Playwrightu?
+
+Na začiatok treba poznamenať, že už existuje inicatíva pre túto funkcionalitu, a viac si o nej môžete prečítať na GitHube Playwrightu [tu](https://github.com/microsoft/playwright/issues/9468) a [tu](https://github.com/microsoft/playwright/issues/19766) 📖
+
+Je však aj spôsob ako to dosiahnuť teraz a to pomocou [Automatic fixtures](https://playwright.dev/docs/test-fixtures#automatic-fixtures). Predstavme si teda situáciu, že chceme mať pred každým testom akceptované cookies, ale nechceme v každom teste klikať na button, aby sme sa zbavili otravného banneru. Samozrejme, môžeme to urobiť podobným spôsobom ako v príklade vyššie, ale v prípade, že budeme mať 182 testov, tak to musíme urobiť v 182 testoch, čo je dosť neefektívne.
+
+Fixtures môžeme chápať ako možnosť rozšíriť test konfiguráciu a pridať do nej nejaké vlastnosti, ktoré potrebujeme. V našom prípade chceme pridať cookies, ktoré budú akceptované pred každým testom. Najprv si vytvoríme súbor `fixtures.ts` a do neho pridáme nasledovný kód:
+
+```js
+import { test as base } from "@playwright/test"
+```
+
+Tento import znamená, že importujeme `test` z `@playwright/test` a priradíme ho do premennej `base`. Teraz môžeme vytvoriť novú `test` inštanciu, ktorú rozšírime. Hack spočíva v tom, že do nej nič nedoplníme, objekt necháme prázdny. Je to z toho dôvodu, že tam nepridávame napr. login alebo obdobnú funkcionalitu. My potrebujeme pracovať s hooks a tie sú časťou test-runneru. Preto beforeEach naviažeme na `test` inštanciu, ktorú sme si vytvorili a tam už môžeme napísať kód na pridanie cookies:
+
+```js
+import { test as base } from "@playwright/test"
+
+export const test = base.extend({})
+test.beforeEach(async ({ context }) => {
+  await context.addCookies([
+    {
+      name: "__kwc_agreed",
+      value: "true",
+      domain: ".kiwi.com",
+      path: "/",
+    },
+  ])
+})
+```
+
+V tomto bode nám už stačí iba jedna zmena, ktorú urobíme v našich testoch. 
+
+Namiesto tohto importu:
+```js
+import { test } from "@playwright/test"
+```
+Použijeme tento import:
+```js
+import { test } from "./fixtures"
+```
