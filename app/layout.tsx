@@ -3,6 +3,7 @@ import { Analytics } from "@/components/analytics"
 import { Inter } from "next/font/google"
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <main>{children}</main>
           <Analytics />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   )
