@@ -17,7 +17,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [["list"], ["html", { open: "on-failure" }]],
   use: {
-    baseURL: "http://localhost:3000/",
+    baseURL: process.env.BASE_URL ?? "http://localhost:3000/",
     testIdAttribute: "data-test",
     trace: "on-first-retry",
   },
