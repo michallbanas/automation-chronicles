@@ -19,13 +19,13 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="sk" suppressHydrationWarning>
       <body
         className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 max-w-2xl mx-auto py-10 px-4 ${inter.className}`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true} disableTransitionOnChange>
           <header className="flex items-center justify-between">
             <ModeToggle />
-            <nav className="ml-auto text-sm font-medium h-6 flex items-center space-x-6">
+            <nav data-test="navbar" className="ml-auto text-sm font-medium h-6 flex items-center space-x-6">
               <Link href="/">Domov</Link>
               <Link href="/o-mne">O mne</Link>
             </nav>

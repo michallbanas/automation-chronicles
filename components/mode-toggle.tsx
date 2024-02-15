@@ -40,6 +40,7 @@ export function ModeToggle() {
       onClick={toggleTheme}
       id="theme-toggle"
       name="theme-toggle"
+      data-test="theme-toggle"
       className="border rounded-md w-6 h-6 flex items-center justify-center">
       <span className="sr-only">Toggle mode</span>
       {theme === "light" ? (
@@ -49,6 +50,7 @@ export function ModeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
+          data-test="light-mode"
           className="w-4 h-4">
           <path
             strokeLinecap="round"
@@ -63,6 +65,7 @@ export function ModeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
+          data-test="dark-mode"
           className="w-4 h-4">
           <path
             strokeLinecap="round"
