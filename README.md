@@ -1,8 +1,8 @@
 # Automation Chronicles
 
-Hey hey everyone 👋, this is a simple blog where I will be sharing my automation tips and tricks. This project is using [content layer template](https://github.com/shadcn/next-contentlayer). I only fixed some small theme-toogle and layout shift issues. 
+Hey hey everyone 👋, this is a simple blog where I will be sharing my automation tips and tricks. This project is using [content layer template](https://github.com/shadcn/next-contentlayer). 
 
-## Features, checklist, roadmap - call it whatever you want
+## Checklist
 
 - [x] Fix layout shift issue
 - [x] Fix persistent issue with theme toogle (icon)
