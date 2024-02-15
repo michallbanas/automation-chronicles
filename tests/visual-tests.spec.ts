@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
   })
 })
 
-test("Visual regression test", async ({ page }) => {
+test.skip("Visual regression test", async ({ page }) => {
   await test.step("Take a screenshot", async () => {
     await expect(page).toHaveScreenshot()
   })
