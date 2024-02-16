@@ -1,8 +1,7 @@
 import { expect } from "@playwright/test"
 import { test } from "./fixtures"
 
-test.beforeEach(async ({ page, isMobile }) => {
-  test.fixme(isMobile, "This test is not yet supported on mobile")
+test.beforeEach("Visit the homepage", async ({ page }) => {
   await page.goto("/")
 })
 

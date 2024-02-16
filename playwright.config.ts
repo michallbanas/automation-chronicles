@@ -13,13 +13,14 @@ export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: 0,
+  workers: process.env.CI ? 4 : "50%",
   reporter: [["list"], ["html", { open: "on-failure" }]],
   use: {
-    baseURL: process.env.BASE_URL ?? "http://localhost:8080/",
+    baseURL: "http://localhost:8080/",
     testIdAttribute: "data-test",
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
+    video: "retain-on-failure",
   },
 
   projects: [
