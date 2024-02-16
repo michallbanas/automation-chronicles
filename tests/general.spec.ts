@@ -9,12 +9,12 @@ test.beforeEach(async ({ page }) => {
 
 test("SEO cheks", async ({ page }) => {
   await test.step("Check the title is correct", async () => {
-    await expect(page).toHaveTitle("QA Blog")
+    await expect(page).toHaveTitle("Automation Chronicles")
   })
 
   await test.step("Check the description is correct", async () => {
     const description = page.locator("meta[name=description]")
-    await expect(description).toHaveAttribute("content", "QA Blog description")
+    await expect(description).toHaveAttribute("content", "Blog zameraný na automatizáciu a vývoj softvéru")
   })
 })
 

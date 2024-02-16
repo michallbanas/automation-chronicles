@@ -1,7 +1,6 @@
 {
-  "name": "next-contentlayer",
-  "version": "0.1.0",
-  "private": true,
+  "name": "automation-chronicles",
+  "version": "0.2.0",
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
