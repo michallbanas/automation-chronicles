@@ -19,7 +19,8 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL ?? "http://localhost:8080/",
     testIdAttribute: "data-test",
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
+    video: "retain-on-failure"
   },
 
   projects: [
