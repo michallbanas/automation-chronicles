@@ -5,7 +5,8 @@ test.beforeEach("Visit the homepage", async ({ page }) => {
   await page.goto("/")
 })
 
-test("should check light/dark mode functionality", async ({ page }) => {
+test("should check light/dark mode functionality", async ({ page, isMobile }) => {
+  test.skip(isMobile, "No need to run on mobile")
   const html = page.locator("html")
   const themeToogle = page.getByTestId("theme-toggle")
   const darkMode = page.getByTestId("dark-mode")
