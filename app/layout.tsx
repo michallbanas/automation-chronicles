@@ -9,8 +9,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "QA Blog",
-  description: "QA Blog description",
+  title: "Automation Chronicles",
+  description: "Blog zameraný na automatizáciu a vývoj softvéru",
 }
 
 interface RootLayoutProps {
