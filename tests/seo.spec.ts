@@ -5,7 +5,7 @@ test.beforeEach("Visit the homepage", async ({ page }) => {
   await page.goto("/")
 })
 
-test("SEO cheks", async ({ page }) => {
+test("SEO checks", async ({ page }) => {
   await test.step("Check the title is correct", async () => {
     await expect(page).toHaveTitle("Automation Chronicles")
   })
