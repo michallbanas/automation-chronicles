@@ -17,10 +17,10 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [["list"], ["html", { open: "on-failure" }]],
   use: {
-    baseURL: process.env.BASE_URL ?? "http://localhost:8080/",
+    baseURL: "http://localhost:8080/",
     testIdAttribute: "data-test",
     trace: "retain-on-failure",
-    video: "retain-on-failure"
+    video: "retain-on-failure",
   },
 
   projects: [
