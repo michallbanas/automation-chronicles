@@ -3,7 +3,9 @@ import { test } from "./fixtures"
 
 test.beforeEach(async ({ page, isMobile }) => {
   test.fixme(isMobile, "This test is not yet supported on mobile")
-  await page.goto("/")
+  await test.step("Visit the homepage", async () => {
+    await page.goto("/")
+  })
 })
 
 test("should check light/dark mode functionality", async ({ page }) => {
