@@ -29,7 +29,13 @@ test("Basic visual assertions", async ({ page }) => {
   await test.step("Main content is visible", async () => {
     const main = page.locator("main")
     const articles = main.locator("article")
+    const h2 = main.locator("h2")
+    const badges = main.locator("[data-test=articleBadges]")
+    const paragraphs = main.locator("p")
     await expect(main).toBeVisible()
     await expect(articles).toHaveCount(1)
+    await expect(h2).toBeVisible()
+    await expect(badges).toBeVisible()
+    await expect(paragraphs).toBeVisible()
   })
 })
