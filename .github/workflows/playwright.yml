@@ -18,6 +18,7 @@ jobs:
       - name: Run Vitest tests
         run: npx vitest
   integration-tests:
+    needs: unit-tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
