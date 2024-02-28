@@ -12,7 +12,7 @@ Hey hey everyone 👋, this is a simple blog where I will be sharing my automati
 - [x] Add Speed Insights
 - [x] Add Playwright tests
 - [x] Setup CI/CD
-- [ ] Update about me page
+- [x] Update about me page
 - [ ] Update SEO
 - [ ] Replace favicon
 - [ ] Add visual regression tests
