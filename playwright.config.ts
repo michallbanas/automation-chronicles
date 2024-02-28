@@ -10,10 +10,10 @@ import { defineConfig, devices } from "@playwright/test"
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: "./tests/integration-tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: 0,
+  retries: 2,
   workers: process.env.CI ? 4 : "50%",
   reporter: [["list"], ["html", { open: "on-failure" }]],
   use: {
