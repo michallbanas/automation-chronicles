@@ -9,15 +9,15 @@ export function ModeToggle() {
   const [mounted, setMounted] = useState(false)
   const [, setLoading] = useState(true)
 
-  const initializeTheme = () => {
-    const localStorageValue = localStorage.getItem("theme")
-    if (!localStorageValue) {
-      const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
-      setTheme(prefersLightMode ? "light" : "dark")
-    }
-  }
-
   useEffect(() => {
+    const initializeTheme = () => {
+      const localStorageValue = localStorage.getItem("theme")
+      if (!localStorageValue) {
+        const prefersLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+        setTheme(prefersLightMode ? "light" : "dark")
+      }
+    }
+
     try {
       initializeTheme()
     } catch (error) {
@@ -26,7 +26,7 @@ export function ModeToggle() {
       setLoading(false)
       setMounted(true)
     }
-  }, [theme])
+  }, [setTheme, theme])
 
   if (!mounted || !resolvedTheme) return <LoadingSkeleton />
 
