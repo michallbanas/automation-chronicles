@@ -15,9 +15,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 2,
   workers: process.env.CI ? 4 : "50%",
-  reporter: process.env.CI
-    ? [["json", { outputFile: "tests/results/integration-tests/results.json" }]]
-    : [["list"], ["html", { open: "on-failure" }]],
+  reporter: process.env.CI ? [["json", { outputFile: "results.json" }]] : [["list"], ["html", { open: "on-failure" }]],
   use: {
     baseURL: "http://localhost:8080/",
     testIdAttribute: "data-test",
