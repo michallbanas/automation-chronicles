@@ -38,7 +38,7 @@ jobs:
         if: always()
         with:
           name: results
-          path: ./tests/results/integration-tests/
+          path: "./tests/results/integration-tests/"
           retention-days: 30
   test-summary:
     needs: integration-tests
@@ -48,14 +48,27 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: results
-          path: ./tests/results/integration-tests/
+          path: "./tests/results/integration-tests/"
       - uses: test-summary/action@v2.3
         with:
           paths: "./tests/results/integration-tests/results.json"
-          output: test-summary.md
+          output: "test-summary.md"
         if: always()
       - uses: actions/upload-artifact@v4.3.1
         with:
           name: test-summary
-          path: test-summary.md
+          path: "test-summary.md"
         if: always()
+      - name: Comment PR
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs');
+            const testSummary = fs.readFileSync('test-summary.md', 'utf8');
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: testSummary
+            });  
