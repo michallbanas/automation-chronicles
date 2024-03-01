@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: test-summary/action@v2.3
         with:
-          paths: "playwright-report/results.json"
+          paths: "results.json"
           output: test-summary.md
         if: always()
       - uses: actions/upload-artifact@v4.3.1
