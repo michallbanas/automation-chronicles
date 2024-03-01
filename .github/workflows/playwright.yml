@@ -44,6 +44,7 @@ jobs:
     needs: integration-tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: test-summary/action@v2.3
         with:
           paths: "./playwright-report/results.json"
