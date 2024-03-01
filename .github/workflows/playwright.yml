@@ -40,3 +40,17 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  test-summary:
+    needs: integration-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: test-summary/action@v2
+        with:
+          paths: "tests/results/integration-tests/results.json"
+          output: test-summary.md
+        if: always()
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-summary
+          path: test-summary.md
+        if: always()
