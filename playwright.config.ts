@@ -7,8 +7,8 @@ export default defineConfig({
   retries: 2,
   workers: process.env.CI ? 4 : "50%",
   reporter: process.env.CI
-    ? [["json", { outputFile: "./playwright-report/results.json" }]]
-    : [["list"], ["html", { open: "on-failure" }]],
+    ? [["json", { outputFile: "tests/results/integration-tests/results.json" }]]
+    : [["html", { outputFile: "tests/results/integration-tests/results.html" }]],
   use: {
     baseURL: "http://localhost:8080/",
     testIdAttribute: "data-test",
