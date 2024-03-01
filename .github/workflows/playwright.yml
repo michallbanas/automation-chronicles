@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: test-summary/action@v2.3
         with:
-          paths: "./playwright-report/results.json"
+          paths: "./tests/integration-tests/results.json"
           output: test-summary.md
         if: always()
       - uses: actions/upload-artifact@v4.3.1
