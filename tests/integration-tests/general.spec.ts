@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test"
 import { test } from "./fixtures"
 
-test.beforeEach("Visit the homepage", async ({ page }) => {
-  await page.goto("/")
+test.beforeEach("Visit the Blog page", async ({ page }) => {
+  await page.goto("/blog")
 })
 
 test("HTML has correct lang attribute", async ({ page }) => {
