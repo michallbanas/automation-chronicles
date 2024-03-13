@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test"
 import { test } from "./fixtures"
 
-test.beforeEach("Visit the homepage", async ({ page }) => {
-  await page.goto("/")
+test.beforeEach("Visit the blog page", async ({ page }) => {
+  await page.goto("/blog")
 })
 
 test("should check light/dark mode functionality", async ({ page, isMobile }) => {

@@ -27,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <ModeToggle />
             <nav data-test="navbar" className="ml-auto text-sm font-medium h-6 flex items-center space-x-6">
               <Link href="/">Domov</Link>
+              <Link href="/blog">Blog</Link>
               <Link href="/o-mne">O mne</Link>
             </nav>
           </header>
