@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test"
-import { test } from "../integration-tests/fixtures"
+import { expect, test } from "@playwright/test"
 
 test.describe("About: Visual regression tests", () => {
   test.beforeEach(async ({ page }) => {

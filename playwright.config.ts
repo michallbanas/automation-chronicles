@@ -14,6 +14,7 @@ export default defineConfig({
     testIdAttribute: "data-test",
     trace: "retain-on-failure",
     video: "retain-on-failure",
+    storageState: "tests/playwright-storage.json",
   },
 
   projects: [
