@@ -6,7 +6,7 @@ export default defineConfig({
   snapshotPathTemplate: "./tests/visual-testing/screenshots/{arg}{ext}",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: 2,
+  retries: 1,
   workers: process.env.CI ? 4 : "50%",
   reporter: [["list"], ["html", { open: "on-failure" }]],
   use: {
