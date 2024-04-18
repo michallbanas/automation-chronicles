@@ -1,16 +1,9 @@
 import { defineConfig, devices } from "@playwright/test"
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
-  testDir: "./tests/integration-tests",
+  testDir: "./tests/",
+  testIgnore: ["./tests/unit-tests/**", "./tests/e2e/**"],
+  snapshotPathTemplate: "./tests/visual-testing/screenshots/{arg}{ext}",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 2,
@@ -48,11 +41,4 @@ export default defineConfig({
       use: { ...devices["iPhone 12"] },
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 })

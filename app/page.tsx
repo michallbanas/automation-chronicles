@@ -39,7 +39,7 @@ export default function Home() {
           </div>
         </div>
       </h2>
-      <article>
+      <article data-test="article-description">
         <p className="pt-10">
           Volám sa <strong>Michal</strong>, pracujem ako QA Platform Enginner, ale rád vyvíjam aj vlastné projekty.
           Keďže som sa narodil v roku v ktorom Nirvana zmenila svet albumom Nevermind, tak moje srdce stále patrí do
