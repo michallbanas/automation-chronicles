@@ -2,7 +2,7 @@
   "name": "automation-chronicles",
   "version": "0.5.0",
   "scripts": {
-    "dev": "next dev -p 8080",
+    "dev": "next dev -p 8182",
     "build": "next build",
     "preview": "next build && next start",
     "start": "next start",
@@ -11,32 +11,33 @@
     "unit:test": "vitest",
     "unit:test:ui": "vitest --ui",
     "pw": "playwright test",
-    "pw:ui": "playwright test --ui"
+    "pw:ui": "playwright test --ui",
+    "e2e": "cypress open"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.10",
-    "@types/node": "20.11.27",
-    "@types/react": "18.2.65",
-    "@types/react-dom": "18.2.22",
+    "@tailwindcss/typography": "^0.5.12",
+    "@types/node": "20.12.7",
+    "@types/react": "18.2.79",
+    "@types/react-dom": "18.2.25",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
-    "autoprefixer": "10.4.18",
+    "autoprefixer": "10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "contentlayer": "^0.3.4",
-    "eslint": "8.57.0",
-    "eslint-config-next": "14.1.3",
-    "next": "14.1.3",
+    "eslint": "8.57",
+    "eslint-config-next": "14.2.2",
+    "next": "14.2.2",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.3.0",
-    "npm-check-updates": "^16.14.15",
-    "postcss": "8.4.35",
+    "npm-check-updates": "^16.14.18",
+    "postcss": "8.4.38",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwind-merge": "^2.2.1",
-    "tailwindcss": "3.4.1",
+    "tailwind-merge": "^2.2.2",
+    "tailwindcss": "3.4.3",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.4.2",
+    "typescript": "5.4.5",
     "vite-tsconfig-paths": "^4.3.2"
   },
   "overrides": {
@@ -45,14 +46,14 @@
     }
   },
   "devDependencies": {
-    "@playwright/test": "^1.42.1",
+    "@playwright/test": "^1.43.1",
     "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^14.2.1",
+    "@testing-library/react": "^15.0.2",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/ui": "^1.3.1",
-    "cypress": "^13.7.0",
+    "@vitest/ui": "^1.5.0",
+    "cypress": "^13.7.3",
     "jsdom": "^24.0.0",
     "prettier": "^3.2.5",
-    "vitest": "^1.3.1"
+    "vitest": "^1.5.0"
   }
 }

@@ -2,7 +2,7 @@ import { defineConfig, devices } from "@playwright/test"
 
 export default defineConfig({
   testDir: "./tests/",
-  testIgnore: ["./tests/unit-tests/**", "./tests/e2e/**"],
+  testIgnore: ["**/tests/unit-tests/**", "**/tests/e2e/**"],
   snapshotPathTemplate: "./tests/visual-testing/screenshots/{arg}{ext}",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -10,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 4 : "50%",
   reporter: [["list"], ["html", { open: "on-failure" }]],
   use: {
-    baseURL: "http://localhost:8080/",
+    baseURL: "http://localhost:8182/",
     testIdAttribute: "data-test",
     trace: "retain-on-failure",
     video: "retain-on-failure",
