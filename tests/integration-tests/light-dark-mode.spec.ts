@@ -1,5 +1,4 @@
-import { expect } from "@playwright/test"
-import { test } from "./fixtures"
+import { expect, test } from "@playwright/test"
 
 test.beforeEach("Visit the blog page", async ({ page }) => {
   await page.goto("/blog")
