@@ -1,0 +1,12 @@
+version = 1
+
+test_patterns = ["tests/**"]
+
+[[analyzers]]
+name = "test-coverage"
+
+[[analyzers]]
+name = "javascript"
+
+  [analyzers.meta]
+  plugins = ["react"]
